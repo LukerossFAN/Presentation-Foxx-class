@@ -72,30 +72,250 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
     /* Image Container & Consistent Image Sizing */    
-    .img-container {\n      position: relative;\n      margin: 1.5rem auto;\n      width: 80%;\n      max-width: 800px;\n      perspective: 1000px;\n    }\n    .img-container img {\n      width: 100%;\n      border-radius: 10px;\n      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);\n      transition: transform 0.5s ease, box-shadow 0.5s ease;\n      cursor: pointer;\n    }\n    .img-container img:hover {\n      transform: rotateY(15deg) scale(1.05);\n      box-shadow: 0 0 30px rgba(255, 0, 0, 1);\n    }\n    /* Tooltip Positioned Above the Image */\n    .tooltip {\n      position: absolute;\n      top: -2rem;\n      left: 50%;\n      transform: translateX(-50%);\n      background: rgba(0, 0, 0, 0.75);\n      color: #fff;\n      padding: 5px 10px;\n      border-radius: 5px;\n      opacity: 0;\n      transition: opacity 0.3s ease;\n      font-size: 1rem;\n      pointer-events: none;\n    }\n    .img-container:hover .tooltip {\n      opacity: 1;\n    }\n    /* Navigation Dots */\n    .nav-dots {\n      position: fixed;\n      top: 50%;\n      right: 20px;\n      transform: translateY(-50%);\n      z-index: 1000;\n    }\n    .nav-dots button {\n      display: block;\n      width: 15px;\n      height: 15px;\n      margin: 10px 0;\n      background: #777;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      transition: background 0.3s;\n    }\n    .nav-dots button.active {\n      background: #ff0000;\n    }\n    /* Back-to-top Button */\n    .back-to-top {\n      position: fixed;\n      bottom: 20px;\n      right: 20px;\n      background: #ff0000;\n      padding: 10px 15px;\n      border: none;\n      border-radius: 5px;\n      cursor: pointer;\n      transition: opacity 0.3s;\n    }\n    .back-to-top:hover {\n      opacity: 1;\n    }\n    /* Responsive Adjustments */\n    @media (max-width: 768px) {\n      h1 { font-size: 2.5rem; }\n      h2 { font-size: 2rem; }\n      .text { font-size: 1.1rem; }\n      .img-container { width: 90%; }\n    }\n  </style>\n</head>\n<body>\n  <!-- Title Slide -->\n  <header class=\"section fade-in\" id=\"slide0\">\n    <h1>Why Video Games Are Negative\n      <span class=\"byline\">by Thomas Adolph</span>\n    </h1>\n    <p class=\"text\">An argumentative essay slideshow exploring the detrimental effects of video games—from fostering aggression to diminishing empathy. Prepare for a deep dive into research, personal reflections, and a critical discussion on digital entertainment's impact on our lives.</p>\n  </header>\n\n  <!-- Navigation Dots -->\n  <nav class=\"nav-dots\" aria-label=\"Section navigation\">\n    <button data-target=\"slide0\" aria-label=\"Title\"></button>\n    <button data-target=\"slide1\" aria-label=\"Introduction\"></button>\n    <button data-target=\"slide2\" aria-label=\"Violence & Aggression\"></button>\n    <button data-target=\"slide3\" aria-label=\"Desensitization to War\"></button>\n    <button data-target=\"slide4\" aria-label=\"Brutality in Fighting Games\"></button>\n    <button data-target=\"slide5\" aria-label=\"Psychological Effects\"></button>\n    <button data-target=\"slide6\" aria-label=\"Counterarguments\"></button>\n    <button data-target=\"slide7\" aria-label=\"Conclusion\"></button>\n  </nav>\n\n  <main>\n    <!-- Slide 1: Introduction -->\n    <section class=\"section\" id=\"slide1\">\n      <h2>Introduction</h2>\n      <div class=\"divider\"></div>\n      <p class=\"text\">\n        Video games have become a cornerstone of modern entertainment, captivating millions with their immersive worlds and interactive challenges. However, beneath the surface, there are serious concerns about how these digital experiences might be affecting our behavior and emotions. In this presentation, we explore the argument that the negative impacts of video games—ranging from increased aggression to emotional desensitization—warrant our attention and critical reflection.\n      </p>\n    </section>\n\n    <!-- Slide 2: Violence and Aggression -->\n    <section class=\"section\" id=\"slide2\">\n      <h2>Violence and Aggression</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg\" alt=\"GTA V gameplay screenshot\">\n        <div class=\"tooltip\">GTA V – Simulated chaos that fuels aggression.</div>\n      </div>\n      <p class=\"text\">\n        Games such as <strong>Grand Theft Auto V</strong> expose players to a world of constant violence. Studies by the American Psychological Association suggest that prolonged exposure to such violent scenarios can lead to increased aggressive behavior in real-life situations. The very mechanics that reward chaotic behavior in the game might be dulling natural inhibitions, ultimately affecting how individuals respond to conflict outside the digital realm.\n      </p>\n    </section>\n\n    <!-- Slide 3: Desensitization to War -->\n    <section class=\"section\" id=\"slide3\">\n      <h2>Desensitization to War</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://source.unsplash.com/800x450/?war\" alt=\"Abstract depiction of war\">\n        <div class=\"tooltip\">War games reduce sensitivity to real conflict.</div>\n      </div>\n      <p class=\"text\">\n        Military simulations and war games present combat in a sanitized, stylized manner. This exposure can desensitize players to the harsh realities of war, reducing their emotional response when confronted with real-life violence. As players grow accustomed to the glamorization of conflict, there is a risk that the true horror and human cost of warfare will be overlooked.\n      </p>\n    </section>\n\n    <!-- Slide 4: Brutality in Fighting Games -->\n    <section class=\"section\" id=\"slide4\">\n      <h2>Brutality in Fighting Games</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://source.unsplash.com/800x450/?fighting\" alt=\"Graphic depiction of fighting game action\">\n        <div class=\"tooltip\">Fighting games blur the line between sport and savagery.</div>\n      </div>\n      <p class=\"text\">\n        Fighting games, exemplified by titles like <strong>Mortal Kombat</strong>, showcase hyper-violent encounters that border on the grotesque. While many see these games as pure entertainment, research indicates that the constant bombardment of brutal imagery may shift our perceptions of violence, making extreme aggression appear acceptable within competitive contexts.\n      </p>\n    </section>\n\n    <!-- Slide 5: Psychological Effects of Horror Games -->\n    <section class=\"section\" id=\"slide5\">\n      <h2>Psychological Effects of Horror Games</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://source.unsplash.com/800x450/?horror\" alt=\"Eerie, atmospheric horror game scene\">\n        <div class=\"tooltip\">Horror games trigger intense emotional responses.</div>\n      </div>\n      <p class=\"text\">\n        Horror games like <strong>Dead Space</strong> are designed to provoke fear and anxiety, keeping players on edge. While a controlled dose of adrenaline can be thrilling, continuous exposure to high levels of stress may disrupt normal emotional processing, potentially leading to chronic anxiety or a diminished capacity to experience subtle emotional cues in everyday life.\n      </p>\n    </section>\n\n    <!-- Slide 6: Counterarguments & Rebuttal -->\n    <section class=\"section\" id=\"slide6\">\n      <h2>Counterarguments &amp; Rebuttal</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://source.unsplash.com/800x450/?video-games\" alt=\"A montage of various video games\">\n        <div class=\"tooltip\">Balancing pros and cons.</div>\n      </div>\n      <p class=\"text\">\n        Proponents of video games often point to benefits such as improved hand–eye coordination, enhanced problem-solving skills, and even social connectivity. However, these benefits do not negate the significant negative impacts observed—such as heightened aggression and emotional desensitization. Our rebuttal emphasizes that while moderation is key, the trend towards increasingly immersive and violent content is worrisome and demands a more balanced, responsible approach.\n      </p>\n    </section>\n\n    <!-- Slide 7: Extended Argument & Human Reflection -->\n    <section class=\"section\" id=\"slide7\">\n      <h2>Extended Argument &amp; Human Reflection</h2>\n      <div class=\"divider\"></div>\n      <div class=\"img-container\">\n        <img src=\"https://source.unsplash.com/800x450/?human,emotion\" alt=\"Contemplative individual reflecting\">\n        <div class=\"tooltip\">Reflecting on our humanity.</div>\n      </div>\n      <p class=\"text\">\n        Beyond the statistics and studies, real people are affected. Stories from gamers and mental health experts reveal a decline in empathy and increased social isolation among those who engage in excessive gaming. This slide invites us to reflect on the broader human cost: the gradual erosion of our ability to connect with one another on an emotional level.\n      </p>\n    </section>\n\n    <!-- Slide 8: Conclusion & Final Thoughts -->\n    <section class=\"section\" id=\"slide8\">\n      <h2>Conclusion &amp; Reflection</h2>\n      <div class=\"divider\"></div>\n      <p class=\"text\">\n        In conclusion, while video games offer a captivating escape and even cognitive benefits when played in moderation, the evidence suggests that the pervasive negative impacts—ranging from increased aggression to desensitization and reduced empathy—are serious concerns. As digital entertainment becomes ever more immersive, we must consider ways to balance the allure of these virtual worlds with a commitment to emotional well-being and responsible design.\n      </p>\n      <p class=\"text\"><em>For Mr. Foxx – Sources: APA Research, Harvard Studies, and Independent Reviews</em></p>\n    </section>\n  </main>\n\n  <footer>\n    <button class=\"back-to-top\" onclick=\"scrollToTop()\">Back to Top</button>\n  </footer>\n\n  <script>\n    // Intersection Observer for fade-in effects\n    const observer = new IntersectionObserver(entries => {\n      entries.forEach(entry => {\n        if (entry.isIntersecting) {\n          entry.target.classList.add('fade-in');\n          observer.unobserve(entry.target);\n        }\n      });\n    }, { threshold: 0.3 });\n    document.querySelectorAll('.section').forEach(section => observer.observe(section));\n\n    // Navigation Dots Functionality\n    const navDots = document.querySelectorAll('.nav-dots button');\n    navDots.forEach(dot => {\n      dot.addEventListener('click', () => {\n        const targetID = dot.getAttribute('data-target');\n        document.getElementById(targetID).scrollIntoView({ behavior: 'smooth' });\n      });\n    });\n\n    // Active Dot Update using Intersection Observer\n    const dotObserver = new IntersectionObserver(entries => {\n      entries.forEach(entry => {\n        if (entry.isIntersecting) {\n          const id = entry.target.getAttribute('id');\n          navDots.forEach(dot => {\n            dot.classList.toggle('active', dot.getAttribute('data-target') === id);\n          });\n        }\n      });\n    }, { threshold: 0.5 });\n    document.querySelectorAll('.section').forEach(section => dotObserver.observe(section));\n\n    // Back-to-Top Button Function\n    function scrollToTop() {\n      window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n  </script>\n</body>\n</html>\n```
+    .img-container {
+      position: relative;
+      margin: 1.5rem auto;
+      width: 80%;
+      max-width: 800px;
+      perspective: 1000px;
+    }
+    .img-container img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+    }
+    .img-container img:hover {
+      transform: rotateY(15deg) scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    }
+    /* Tooltip Positioned Above the Image */
+    .tooltip {
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .img-container:hover .tooltip {
+      opacity: 1;
+    }
+    /* Navigation Dots */
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 1000;
+    }
+    .nav-dots button {
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: 10px 0;
+      background: #777;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .nav-dots button.active {
+      background: #ff0000;
+    }
+    /* Back-to-top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff0000;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .back-to-top:hover {
+      opacity: 1;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      .text { font-size: 1.1rem; }
+      .img-container { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Title Slide -->
+  <header class="section fade-in" id="slide0">
+    <h1>Why Video Games Are Negative
+      <span class="byline">by Thomas Adolph</span>
+    </h1>
+    <p class="text">An argumentative essay slideshow exploring the detrimental effects of video games—from fostering aggression to diminishing empathy. Prepare for a deep dive into research, personal reflections, and a critical discussion on digital entertainment's impact on our lives.</p>
+  </header>
 
----
+  <!-- Navigation Dots -->
+  <nav class="nav-dots" aria-label="Section navigation">
+    <button data-target="slide0" aria-label="Title"></button>
+    <button data-target="slide1" aria-label="Introduction"></button>
+    <button data-target="slide2" aria-label="Violence & Aggression"></button>
+    <button data-target="slide3" aria-label="Desensitization to War"></button>
+    <button data-target="slide4" aria-label="Brutality in Fighting Games"></button>
+    <button data-target="slide5" aria-label="Psychological Effects"></button>
+    <button data-target="slide6" aria-label="Counterarguments"></button>
+    <button data-target="slide7" aria-label="Conclusion"></button>
+  </nav>
 
-### Explanation of Changes
+  <main>
+    <!-- Slide 1: Introduction -->
+    <section class="section" id="slide1">
+      <h2>Introduction</h2>
+      <div class="divider"></div>
+      <p class="text">
+        Video games have become a cornerstone of modern entertainment, captivating millions with their immersive worlds and interactive challenges. However, beneath the surface, there are serious concerns about how these digital experiences might be affecting our behavior and emotions. In this presentation, we explore the argument that the negative impacts of video games—ranging from increased aggression to emotional desensitization—warrant our attention and critical reflection.
+      </p>
+    </section>
 
-- **Consistent Image Sizing:**  
-  The `.img-container` now has a fixed maximum width, and all images use 100% width of that container. This ensures uniform sizing across slides.
+    <!-- Slide 2: Violence and Aggression -->
+    <section class="section" id="slide2">
+      <h2>Violence and Aggression</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg" alt="GTA V gameplay screenshot">
+        <div class="tooltip">GTA V – Simulated chaos that fuels aggression.</div>
+      </div>
+      <p class="text">
+        Games such as <strong>Grand Theft Auto V</strong> expose players to a world of constant violence. Studies by the American Psychological Association suggest that prolonged exposure to such violent scenarios can lead to increased aggressive behavior in real-life situations. The very mechanics that reward chaotic behavior in the game might be dulling natural inhibitions, ultimately affecting how individuals respond to conflict outside the digital realm.
+      </p>
+    </section>
 
-- **Tooltip Repositioning:**  
-  The tooltip now appears above each image (using `top: -2rem`) so it doesn’t obscure the text below.
+    <!-- Slide 3: Desensitization to War -->
+    <section class="section" id="slide3">
+      <h2>Desensitization to War</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://source.unsplash.com/800x450/?war" alt="Abstract depiction of war">
+        <div class="tooltip">War games reduce sensitivity to real conflict.</div>
+      </div>
+      <p class="text">
+        Military simulations and war games present combat in a sanitized, stylized manner. This exposure can desensitize players to the harsh realities of war, reducing their emotional response when confronted with real-life violence. As players grow accustomed to the glamorization of conflict, there is a risk that the true horror and human cost of warfare will be overlooked.
+      </p>
+    </section>
 
-- **Extended, Humanized Text:**  
-  Each slide now has longer, more reflective paragraphs that explain the argument in detail while engaging the viewer.
+    <!-- Slide 4: Brutality in Fighting Games -->
+    <section class="section" id="slide4">
+      <h2>Brutality in Fighting Games</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://source.unsplash.com/800x450/?fighting" alt="Graphic depiction of fighting game action">
+        <div class="tooltip">Fighting games blur the line between sport and savagery.</div>
+      </div>
+      <p class="text">
+        Fighting games, exemplified by titles like <strong>Mortal Kombat</strong>, showcase hyper-violent encounters that border on the grotesque. While many see these games as pure entertainment, research indicates that the constant bombardment of brutal imagery may shift our perceptions of violence, making extreme aggression appear acceptable within competitive contexts.
+      </p>
+    </section>
 
-- **Enhanced Title Slide:**  
-  The title slide includes the byline (“by Thomas Adolph”) and an introductory paragraph that sets the tone.
+    <!-- Slide 5: Psychological Effects of Horror Games -->
+    <section class="section" id="slide5">
+      <h2>Psychological Effects of Horror Games</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://source.unsplash.com/800x450/?horror" alt="Eerie, atmospheric horror game scene">
+        <div class="tooltip">Horror games trigger intense emotional responses.</div>
+      </div>
+      <p class="text">
+        Horror games like <strong>Dead Space</strong> are designed to provoke fear and anxiety, keeping players on edge. While a controlled dose of adrenaline can be thrilling, continuous exposure to high levels of stress may disrupt normal emotional processing, potentially leading to chronic anxiety or a diminished capacity to experience subtle emotional cues in everyday life.
+      </p>
+    </section>
 
-- **Creative 3D Effects:**  
-  Hover effects on images now include a slight Y-axis rotation to give a 3D feel.
+    <!-- Slide 6: Counterarguments & Rebuttal -->
+    <section class="section" id="slide6">
+      <h2>Counterarguments &amp; Rebuttal</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://source.unsplash.com/800x450/?video-games" alt="A montage of various video games">
+        <div class="tooltip">Balancing pros and cons.</div>
+      </div>
+      <p class="text">
+        Proponents of video games often point to benefits such as improved hand–eye coordination, enhanced problem-solving skills, and even social connectivity. However, these benefits do not negate the significant negative impacts observed—such as heightened aggression and emotional desensitization. Our rebuttal emphasizes that while moderation is key, the trend towards increasingly immersive and violent content is worrisome and demands a more balanced, responsible approach.
+      </p>
+    </section>
 
-- **Eight Slides:**  
-  There are eight sections (slides) including introduction, multiple arguments, counterarguments, and a conclusion with source credits.
+    <!-- Slide 7: Extended Argument & Human Reflection -->
+    <section class="section" id="slide7">
+      <h2>Extended Argument &amp; Human Reflection</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://source.unsplash.com/800x450/?human,emotion" alt="Contemplative individual reflecting">
+        <div class="tooltip">Reflecting on our humanity.</div>
+      </div>
+      <p class="text">
+        Beyond the statistics and studies, real people are affected. Stories from gamers and mental health experts reveal a decline in empathy and increased social isolation among those who engage in excessive gaming. This slide invites us to reflect on the broader human cost: the gradual erosion of our ability to connect with one another on an emotional level.
+      </p>
+    </section>
 
-After you update your GitHub repository with this new code and push it, give GitHub Pages a few minutes to redeploy your site. Then do a hard refresh in your browser (e.g., `Ctrl+Shift+R` or `Cmd+Shift+R`) to see the changes.
+    <!-- Slide 8: Conclusion & Final Thoughts -->
+    <section class="section" id="slide8">
+      <h2>Conclusion &amp; Reflection</h2>
+      <div class="divider"></div>
+      <p class="text">
+        In conclusion, while video games offer a captivating escape and even cognitive benefits when played in moderation, the evidence suggests that the pervasive negative impacts—ranging from increased aggression to desensitization and reduced empathy—are serious concerns. As digital entertainment becomes ever more immersive, we must consider ways to balance the allure of these virtual worlds with a commitment to emotional well-being and responsible design.
+      </p>
+      <p class="text"><em>For Mr. Foxx – Sources: APA Research, Harvard Studies, and Independent Reviews</em></p>
+    </section>
+  </main>
 
-Let me know if you need further adjustments!
+  <footer>
+    <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in effects
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+    // Navigation Dots Functionality
+    const navDots = document.querySelectorAll('.nav-dots button');
+    navDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const targetID = dot.getAttribute('data-target');
+        document.getElementById(targetID).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Active Dot Update using Intersection Observer
+    const dotObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navDots.forEach(dot => {
+            dot.classList.toggle('active', dot.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.section').forEach(section => dotObserver.observe(section));
+
+    // Back-to-Top Button Function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
