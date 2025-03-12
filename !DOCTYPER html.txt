@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Video Games Are Negative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <!-- SEO and Accessibility Meta Tags -->
+  <meta name="description" content="An essay discussing the negative impacts of video games with a modern, interactive design." />
+  <style>
+    /* Reset and Global Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #111, #333);
+      color: #fefefe;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      font-family: 'Roboto Slab', serif;
+    }
+    h1 {
+      font-size: 3rem;
+      margin: 1rem 0;
+      text-shadow: 3px 3px 12px rgba(255, 0, 0, 0.8);
+      text-align: center;
+    }
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
+      text-decoration: underline;
+    }
+    /* Layout using Semantic Tags */
+    header, main, footer {
+      padding: 0 1rem;
+    }
+    /* Section Styles */
+    .section {
+      padding: 5rem 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+    .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .divider {
+      width: 60%;
+      height: 4px;
+      background: #ff0000;
+      margin: 1rem auto 2rem;
+      border-radius: 2px;
+      box-shadow: 0px 0px 10px #ff0000;
+    }
+    .text {
+      font-size: 1.375rem;
+      max-width: 800px;
+      margin: 1.25rem auto;
+      text-align: justify;
+      padding: 0 0.625rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+    /* Image & Tooltip Styles */
+    .img-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    img {
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    }
+    .tooltip {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .img-container:hover .tooltip {
+      opacity: 1;
+    }
+    /* Navigation Dots */
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 1000;
+    }
+    .nav-dots button {
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: 10px 0;
+      background: #777;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .nav-dots button.active {
+      background: #ff0000;
+    }
+    /* Back-to-top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ff0000;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .back-to-top:hover {
+      opacity: 1;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 1.75rem; }
+      .text { font-size: 1.125rem; }
+      img { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Why Video Games Are Negative</h1>
+  </header>
+
+  <!-- Navigation Dots -->
+  <nav class="nav-dots" aria-label="Section navigation">
+    <button data-target="section1" aria-label="Violence and Aggression"></button>
+    <button data-target="section2" aria-label="Desensitization to War"></button>
+    <button data-target="section3" aria-label="Brutality in Fighting Games"></button>
+    <button data-target="section4" aria-label="Psychological Effects of Horror Games"></button>
+    <button data-target="section5" aria-label="Violence and Criminal Behavior"></button>
+    <button data-target="section6" aria-label="Overall Discussion & Reflection"></button>
+  </nav>
+
+  <main>
+    <!-- Section 1: Violence and Aggression -->
+    <section class="section" id="section1">
+      <h2>Violence and Aggression</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg" alt="GTA V gameplay screenshot">
+        <div class="tooltip">GTA V – A playground of chaos and violence.</div>
+      </div>
+      <p class="text">
+        When we talk about video games like <strong>Grand Theft Auto</strong>, we're not just discussing a form of entertainment—it's a deep dive into simulated chaos. Research from the American Psychological Association indicates that the hyper-realistic violence in these games can foster increased aggression. Repeated exposure may dull our natural aversion to conflict.
+      </p>
+    </section>
+
+    <!-- Section 2: Desensitization to War -->
+    <section class="section" id="section2">
+      <h2>Desensitization to War</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://i.redd.it/qq2e5foga53c1.jpg" alt="Call of Duty gameplay screenshot">
+        <div class="tooltip">Call of Duty – Where the battleground becomes a norm.</div>
+      </div>
+      <p class="text">
+        In <strong>Call of Duty</strong> and similar war simulations, the glamour of military heroics contrasts with the grim reality of combat. Studies suggest that such games can numb our emotional responses, making real-world warfare seem distant and less impactful.
+      </p>
+    </section>
+
+    <!-- Section 3: Brutality in Fighting Games -->
+    <section class="section" id="section3">
+      <h2>Brutality in Fighting Games</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://i.redd.it/after-4-mortal-kombat-games-finally-v0-yryyojf4u21b1.jpg?width=1284&format=pjpg&auto=webp&s=614aa29d26fab0a4ca3c6328d8063634a208eacb" alt="Mortal Kombat gameplay screenshot">
+        <div class="tooltip">Mortal Kombat – A realm where brutality is an art.</div>
+      </div>
+      <p class="text">
+        Few games are as infamous as <strong>Mortal Kombat</strong> for their graphic depictions. Research indicates that repeated exposure to such hyper-violent imagery might normalize extreme aggression, shifting our perceptions of brutality.
+      </p>
+    </section>
+
+    <!-- Section 4: Psychological Effects of Horror Games -->
+    <section class="section" id="section4">
+      <h2>Psychological Effects of Horror Games</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/57/Dead_Space_Box_Art.jpg" alt="Dead Space game box art">
+        <div class="tooltip">Dead Space – Evoking fear and anxiety.</div>
+      </div>
+      <p class="text">
+        Horror games like <strong>Dead Space</strong> pull us into eerie worlds, evoking intense fear and anxiety. Prolonged exposure to such tension can disturb our emotional balance, affecting our ability to process subtle everyday cues.
+      </p>
+    </section>
+
+    <!-- Section 5: Violence and Criminal Behavior -->
+    <section class="section" id="section5">
+      <h2>Violence and Criminal Behavior</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKbxA9JELdjj9TRmZaFSjRAqTp6cCRtX1Gg&s" alt="Manhunt game cover">
+        <div class="tooltip">Manhunt – Controversy in every brutal moment.</div>
+      </div>
+      <p class="text">
+        The controversial game <strong>Manhunt</strong> pushes boundaries with its visceral portrayal of criminality. Critics argue that rewarding extreme acts may encourage a mindset that views violence as an acceptable means to an end.
+      </p>
+    </section>
+
+    <!-- Section 6: Overall Discussion & Reflection -->
+    <section class="section" id="section6">
+      <h2>Overall Discussion &amp; Reflection</h2>
+      <div class="divider"></div>
+      <div class="img-container">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Abstract debate illustration">
+        <div class="tooltip">Weighing the pros and cons.</div>
+      </div>
+      <p class="text">
+        In the grand tapestry of video game culture, the debate over their negative impact remains contentious. While immersive worlds provide excitement, the potential psychological and social consequences demand careful scrutiny. This essay invites thoughtful discussion on moderation, responsible design, and critical media consumption.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
+  </footer>
+
+  <script>
+    // Use Intersection Observer for fade-in effects
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target); // Stop observing after fade-in
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Navigation dots functionality
+    const navDots = document.querySelectorAll(".nav-dots button");
+    navDots.forEach(dot => {
+      dot.addEventListener("click", function() {
+        const targetID = this.getAttribute("data-target");
+        const targetSection = document.getElementById(targetID);
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    // Update active dot using Intersection Observer on sections
+    const sections = document.querySelectorAll(".section");
+    const dotObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navDots.forEach(dot => {
+            dot.classList.toggle("active", dot.getAttribute("data-target") === id);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(section => dotObserver.observe(section));
+
+    // Back-to-top button function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
