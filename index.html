@@ -5,470 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Impact of Video Games: A Critical Analysis</title>
   <style>
-    /* Reset and Global Styles */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    :root {
-      --primary-color: #3a6ea5;
-      --secondary-color: #004e92;
-      --text-color: #333;
-      --background-color: #f0f4f8;
-      --slide-background: #fff;
-      --accent-color: #6c757d;
-      --transition-normal: 0.4s ease;
-      --box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      --border-radius: 12px;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 2rem;
-    }
-    
+    /* Reset and Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Arial', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      background-image: linear-gradient(45deg, #f0f4f8 0%, #d5e1ec 100%);
+      background: #111;
+      color: #eee;
+      overflow-x: hidden;
+      cursor: none; /* Hide default cursor */
     }
+    h1, h2 { letter-spacing: 2px; text-transform: uppercase; }
+    p { line-height: 1.6; margin: 20px 0; }
     
-    h1, h2, h3 {
-      font-family: 'Georgia', serif;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-    }
-    
-    h1 {
-      font-size: 2.8rem;
-      margin-top: 1rem;
-      text-align: center;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-      background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      padding: 0.5rem;
-    }
-    
-    h1 span.byline {
-      display: block;
-      font-size: 1.2rem;
-      color: var(--accent-color);
-      margin: 0.5rem 0;
-      font-style: italic;
-      text-shadow: none;
-      -webkit-text-fill-color: var(--accent-color);
-    }
-    
-    h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-    }
-    
-    /* Section Styles */
+    /* Section (Slide) Styles */
     .section {
-      padding: 3rem 2rem;
-      background-color: var(--slide-background);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      margin: 3rem auto;
+      position: relative;
+      padding: 60px 20px;
+      margin: 40px auto;
       max-width: 1000px;
+      border-radius: 15px;
+      overflow: hidden;
+      z-index: 1;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      overflow: hidden;
-      position: relative;
+      transition: opacity 1s ease, transform 1s ease;
     }
-    
     .section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
-    .section::before {
-      content: '';
+    /* Each slide gets its own photorealistic background via CSS background-image.
+       An additional .bg-effect layer (if needed) is added for extra animation. */
+    .slide-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    }
-    
-    .text {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 1.5rem auto;
-      text-align: left;
-      line-height: 1.8;
-      color: #444;
-    }
-    
-    .text strong {
-      color: var(--secondary-color);
-      font-weight: 600;
-    }
-    
-    /* Enhanced Image Styles */
-    .img-container {
-      margin: 2.5rem auto;
-      width: 85%;
-      max-width: 700px;
-      perspective: 1000px;
-    }
-    
-    .img-wrapper {
-      width: 100%;
-      height: 0;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      transition: transform 0.6s ease;
-      transform-style: preserve-3d;
-    }
-    
-    .img-wrapper:hover {
-      transform: rotateY(5deg);
-    }
-    
-    .img-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      padding: 1rem;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      transition: transform 0.8s ease;
+      z-index: -2;
+      opacity: 0.6;
+      animation: bgPulse 8s infinite alternate;
+    }
+    @keyframes bgPulse {
+      from { transform: scale(1); opacity: 0.6; }
+      to   { transform: scale(1.05); opacity: 0.5; }
     }
     
-    .img-bg:hover {
-      transform: scale(1.05);
+    /* Custom poster image style */
+    .poster-image {
+      width: 300px;
+      max-width: 90%;
+      border: 5px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      margin: 20px auto;
+      display: block;
     }
     
-    .img-caption {
-      text-align: center;
-      font-style: italic;
-      margin-top: 0.8rem;
-      color: var(--accent-color);
-      font-size: 0.95rem;
-      position: relative;
-      padding-bottom: 0.5rem;
+    /* Custom Cursor */
+    #custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.2s ease;
+      z-index: 10000;
     }
     
-    .img-caption::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 2px;
-      background: var(--accent-color);
-      opacity: 0.5;
-    }
-    
-    /* Advanced Navigation Styles */
+    /* Navigation Dots and Progress Bar */
     .nav-dots {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 10px 16px;
-      border-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      gap: 10px;
       z-index: 1000;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
     }
-    
     .nav-dots button {
-      display: block;
       width: 12px;
       height: 12px;
-      margin: 0 8px;
-      background: #ccc;
+      border-radius: 50%;
       border: none;
-      border-radius: 50%;
+      background: #888;
       cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: transform 0.3s, background 0.3s;
     }
-    
-    .nav-dots button::after {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
-      border-radius: 50%;
-      border: 1px solid transparent;
-      transition: all 0.3s ease;
-    }
-    
-    .nav-dots button.active {
-      background: var(--primary-color);
-      transform: scale(1.3);
-    }
-    
-    .nav-dots button.active::after {
-      border-color: var(--primary-color);
-      opacity: 0.5;
-    }
-    
-    .nav-dots button:hover {
-      background: var(--secondary-color);
-      transform: scale(1.2);
-    }
-    
-    /* Enhanced Back-to-top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary-color);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-      z-index: 100;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .back-to-top svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-    
-    .back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .back-to-top:hover {
-      background: var(--secondary-color);
-      transform: translateY(-5px);
-    }
-    
-    /* Enhanced Progress Bar */
+    .nav-dots button.active { background: #fff; transform: scale(1.4); }
     .progress-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 6px;
+      height: 4px;
       background: rgba(255, 255, 255, 0.1);
-      z-index: 9999;
+      z-index: 999;
     }
-    
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
       transition: width 0.2s ease;
+    }
+    
+    /* Image container styles */
+    .img-container {
+      margin: 20px auto;
+      max-width: 600px;
       position: relative;
-      overflow: hidden;
+      z-index: 2;
     }
-    
-    .progress-bar::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100px;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.3);
-      animation: progress-shine 2s infinite;
-    }
-    
-    @keyframes progress-shine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(400%); }
-    }
-    
-    /* Sources Section */
-    .sources {
-      font-size: 0.9rem;
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #eee;
-      font-style: italic;
-      color: var(--accent-color);
-    }
-    
-    /* Specific Image Backgrounds */
-    .game-violence-bg {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                  radial-gradient(circle at center, #520000 0%, #000 100%);
-    }
-    
-    .war-games-bg {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                  radial-gradient(circle at center, #263238 0%, #000 100%);
-    }
-    
-    .fighting-games-bg {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                  radial-gradient(circle at center, #4a1010 0%, #000 100%);
-    }
-    
-    .horror-games-bg {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                  radial-gradient(circle at center, #1a0022 0%, #000 100%);
-    }
-    
-    .video-games-bg {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                  radial-gradient(circle at center, #003300 0%, #000 100%);
-    }
-    
-    .human-reflection-bg {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                  radial-gradient(circle at center, #001a33 0%, #000 100%);
-    }
-    
-    /* Mouse trail effect */
-    .cursor-trail {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary-color);
-      opacity: 0;
-      z-index: 10000;
-      pointer-events: none;
-      transition: transform 0.1s, opacity 0.5s;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2rem; }
-      h2 { font-size: 1.6rem; }
-      .text { font-size: 1rem; }
-      .img-container { width: 95%; }
-      .section { padding: 2rem 1rem; }
-    }
-    
-    @media (max-width: 480px) {
-      h1 { font-size: 1.8rem; }
-      h2 { font-size: 1.4rem; }
-      .text { font-size: 0.95rem; }
-      .nav-dots { display: none; }
-    }
-    
-    /* Animated background */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .img-container img {
       width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.4;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     }
     
-    .bg-animation span {
-      position: absolute;
-      display: block;
-      width: 40px;
-      height: 40px;
-      background: var(--primary-color);
-      border-radius: 50%;
+    /* Fade-in text animation */
+    .animated { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    
+    /* Back-to-top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff416c;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
       opacity: 0;
-      animation: float 15s infinite linear;
+      transition: opacity 0.3s;
+      z-index: 1000;
     }
-    
-    @keyframes float {
-      0% {
-        transform: scale(0) translateY(0) rotate(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.1;
-      }
-      100% {
-        transform: scale(0.8) translateY(-800px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-    
-    /* Content fade-in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .back-to-top.visible { opacity: 1; }
   </style>
 </head>
 <body>
-  <!-- Background Animation -->
-  <div class="bg-animation">
-    <span style="left:10%; animation-delay: 0s;"></span>
-    <span style="left:20%; animation-delay: 2s;"></span>
-    <span style="left:35%; animation-delay: 4s;"></span>
-    <span style="left:50%; animation-delay: 6s;"></span>
-    <span style="left:65%; animation-delay: 8s;"></span>
-    <span style="left:80%; animation-delay: 10s;"></span>
-    <span style="left:90%; animation-delay: 12s;"></span>
-  </div>
-
+  <!-- Custom Cursor -->
+  <div id="custom-cursor"></div>
+  
   <!-- Progress Bar -->
   <div class="progress-container">
     <div class="progress-bar"></div>
   </div>
   
-  <!-- Title Slide -->
-  <header class="section" id="slide0">
-    <h1>The Impact of Video Games: A Critical Analysis
-      <span class="byline">by Thomas Adolph</span>
-    </h1>
-    <p class="text">
-      An examination of the potential effects of video games—from behavioral impacts to emotional responses. This presentation explores research findings and critical perspectives on digital entertainment's influence on our lives.
-    </p>
-  </header>
-
   <!-- Navigation Dots -->
-  <nav class="nav-dots">
+  <div class="nav-dots">
     <button data-target="slide0" class="active"></button>
     <button data-target="slide1"></button>
     <button data-target="slide2"></button>
@@ -478,253 +167,185 @@
     <button data-target="slide6"></button>
     <button data-target="slide7"></button>
     <button data-target="slide8"></button>
-  </nav>
-
-  <main>
-    <!-- Slide 1: Introduction -->
-    <section class="section" id="slide1">
-      <h2>Introduction</h2>
-      <p class="text">
-        Video games have become a cornerstone of modern entertainment, captivating millions with their immersive worlds and interactive challenges. However, beneath the surface, there are concerns about how these digital experiences might be affecting our behavior and emotions. In this presentation, we explore the argument that certain impacts of video games—ranging from potential behavioral changes to emotional responses—warrant our attention and critical reflection.
-      </p>
-    </section>
-
-    <!-- Slide 2: Violence and Aggression -->
-    <section class="section" id="slide2">
-      <h2>Violence and Aggression</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg game-violence-bg">
-            <img src="/api/placeholder/600/340" alt="Video game violence representation">
-          </div>
-        </div>
-        <p class="img-caption">Representation of action-based gameplay in popular video games</p>
-      </div>
-      <p class="text">
-        Games such as <strong>Grand Theft Auto V</strong> expose players to scenarios with violent content. Studies by the American Psychological Association suggest that extensive exposure to such content may influence aggressive thoughts and behaviors in some individuals. The gameplay mechanics that reward certain behaviors in the game might affect how players perceive conflict resolution outside the digital realm.
-      </p>
-    </section>
-
-    <!-- Slide 3: Desensitization to War -->
-    <section class="section" id="slide3">
-      <h2>Desensitization to War</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg war-games-bg">
-            <img src="/api/placeholder/600/340" alt="Military simulation game representation">
-          </div>
-        </div>
-        <p class="img-caption">Military simulation games often present stylized combat scenarios</p>
-      </div>
-      <p class="text">
-        Military simulations and war games present combat in a stylized manner. This exposure may reduce emotional responses to depictions of conflict. Some researchers suggest that as players become accustomed to the presentation of warfare in games, there is a potential for diminished awareness of the real-world consequences of armed conflict, potentially creating a disconnect between virtual and real-world understanding of global issues.
-      </p>
-    </section>
-
-    <!-- Slide 4: Brutality in Fighting Games -->
-    <section class="section" id="slide4">
-      <h2>Brutality in Fighting Games</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg fighting-games-bg">
-            <img src="/api/placeholder/600/340" alt="Fighting game representation">
-          </div>
-        </div>
-        <p class="img-caption">Competitive fighting games often feature intense combat mechanics</p>
-      </div>
-      <p class="text">
-        Fighting games, exemplified by titles like <strong>Mortal Kombat</strong>, showcase intense combat encounters. While many see these games as pure entertainment, some research indicates that frequent exposure to such content may influence perceptions of violence in competitive contexts. The stylized nature of these combat mechanics may present violence as a primary solution to conflict rather than promoting alternative conflict resolution strategies.
-      </p>
-    </section>
-
-    <!-- Slide 5: Psychological Effects of Horror Games -->
-    <section class="section" id="slide5">
-      <h2>Psychological Effects of Horror Games</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg horror-games-bg">
-            <img src="/api/placeholder/600/340" alt="Horror game representation">
-          </div>
-        </div>
-        <p class="img-caption">Horror games create intense emotional experiences through atmospheric design</p>
-      </div>
-      <p class="text">
-        Horror games like <strong>Dead Space</strong> are designed to provoke fear and anxiety, creating thrilling experiences. While controlled exposure to such content can be entertaining for many, continuous exposure to high levels of stress-inducing content may impact emotional processing in some individuals. These games might also affect sleep patterns and could potentially intensify pre-existing anxiety conditions in vulnerable players.
-      </p>
-    </section>
-
-    <!-- Slide 6: Counterarguments & Rebuttal -->
-    <section class="section" id="slide6">
-      <h2>Counterarguments &amp; Considerations</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg video-games-bg">
-            <img src="/api/placeholder/600/340" alt="Video game diversity representation">
-          </div>
-        </div>
-        <p class="img-caption">Video games offer diverse experiences with varying impacts</p>
-      </div>
-      <p class="text">
-        Proponents of video games often point to benefits such as improved hand–eye coordination, enhanced problem-solving skills, and social connectivity. These benefits represent important aspects of gaming that should be considered alongside concerns. A balanced perspective recognizes both potential positive and negative impacts, suggesting that moderation and awareness of content are key factors in how games affect individuals. The increasing immersion of modern games calls for thoughtful consideration from developers and consumers alike.
-      </p>
-    </section>
-
-    <!-- Slide 7: Extended Argument & Human Reflection -->
-    <section class="section" id="slide7">
-      <h2>Extended Argument &amp; Human Reflection</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg human-reflection-bg">
-            <img src="/api/placeholder/600/340" alt="Human reflection representation">
-          </div>
-        </div>
-        <p class="img-caption">Reflecting on the human aspects of digital entertainment</p>
-      </div>
-      <p class="text">
-        Beyond the statistics and studies, it's important to consider personal experiences. Reports from gamers and mental health professionals suggest varying impacts on social interaction and empathy development among those who engage in extensive gaming. This perspective invites us to reflect on the broader implications: how digital relationships interact with in-person connections, and how we balance virtual experiences with real-world social development.
-      </p>
-    </section>
-
-    <!-- Slide 8: Conclusion & Final Thoughts -->
-    <section class="section" id="slide8">
-      <h2>Conclusion &amp; Final Thoughts</h2>
-      <div class="img-container">
-        <div class="img-wrapper">
-          <div class="img-bg video-games-bg">
-            <img src="/api/placeholder/600/340" alt="Video games balance representation">
-          </div>
-        </div>
-        <p class="img-caption">Finding balance in digital entertainment consumption</p>
-      </div>
-      <p class="text">
-        In conclusion, while video games offer captivating entertainment and potential cognitive benefits when played in moderation, we should remain aware of their possible impacts across various aspects of human behavior and emotion. As digital entertainment becomes increasingly immersive, finding a thoughtful balance between virtual engagement and real-world experiences becomes essential. Critical thinking about the content we consume and how we engage with it will help shape a healthy relationship with this evolving medium.
-      </p>
-      <div class="sources">
-        <p>Sources: American Psychological Association research, Harvard studies, and independent reviews</p>
-        <p>Prepared for Mr. Foxx's class</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <button class="back-to-top">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 2l-8 8h5v10h6V10h5z"></path>
-      </svg>
-    </button>
-    
-    <!-- Cursor trails container -->
-    <div id="cursor-trails-container"></div>
-  </footer>
-
+  </div>
+  
+  <!-- Slide 0: Title Slide -->
+  <section class="section" id="slide0">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?gaming,console');"></div>
+    <h1 class="animated">The Impact of Video Games: A Critical Analysis</h1>
+    <p class="animated">by Thomas Adolph</p>
+  </section>
+  
+  <!-- Slide 1: Introduction -->
+  <section class="section" id="slide1">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?digital,technology');"></div>
+    <h2 class="animated">Introduction</h2>
+    <div class="img-container animated">
+      <!-- Abstract image representing digital overload -->
+      <img src="https://source.unsplash.com/600x400/?cyber,abstract" alt="Digital Overload">
+    </div>
+    <p class="animated">
+      Video games dominate modern culture—but behind the flashy graphics and immersive worlds lies a darker reality. Repeated exposure to violent content and isolating gameplay is reshaping behavior and diminishing empathy.
+    </p>
+  </section>
+  
+  <!-- Slide 2: GTA V – Violence & Aggression -->
+  <section class="section" id="slide2">
+    <!-- Background with Venice Beach sunset & animated palm trees -->
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?venice-beach,palm-trees');">
+      <!-- Additional CSS animation for subtle horizontal movement is applied via keyframes -->
+    </div>
+    <h2 class="animated">GTA V: Violence &amp; Aggression</h2>
+    <div class="img-container animated">
+      <!-- Official GTA V poster image -->
+      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="GTA V Poster">
+    </div>
+    <p class="animated">
+      Grand Theft Auto V glorifies relentless violence and criminality. Its immersive depiction of brutality—set against the backdrop of sun-soaked streets and palm-lined beaches—risks normalizing hostility in everyday life.
+    </p>
+  </section>
+  
+  <!-- Slide 3: Call of Duty – Desensitization to War -->
+  <section class="section" id="slide3">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?ruined,city,fire');"></div>
+    <h2 class="animated">Call of Duty: Desensitization to War</h2>
+    <div class="img-container animated">
+      <!-- Official Call of Duty poster image (example URL) -->
+      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/2/2a/Call_of_Duty_Modern_Warfare_Remastered.png" alt="Call of Duty Poster">
+    </div>
+    <p class="animated">
+      War games like Call of Duty immerse players in brutal, relentless conflict. The realistic, photorealistic depiction of burning ruins and battlefield chaos risks numbing the natural response to real-world violence.
+    </p>
+  </section>
+  
+  <!-- Slide 4: Mortal Kombat – Brutality in Fighting Games -->
+  <section class="section" id="slide4">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?fight,fire');"></div>
+    <h2 class="animated">Mortal Kombat: Brutality in Fighting Games</h2>
+    <div class="img-container animated">
+      <!-- Official Mortal Kombat poster image -->
+      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/8/87/Mortal_Kombat_11_cover_art.jpg" alt="Mortal Kombat Poster">
+    </div>
+    <p class="animated">
+      Mortal Kombat’s hyper-violent spectacle not only entertains but also celebrates brutality. The realistic, photorealistic visuals intensify the message: violence is rewarded, and aggression becomes normalized.
+    </p>
+  </section>
+  
+  <!-- Slide 5: Dead Space – Psychological Horror -->
+  <section class="section" id="slide5">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?abandoned,space');"></div>
+    <h2 class="animated">Dead Space: Psychological Horror</h2>
+    <div class="img-container animated">
+      <!-- Official Dead Space poster image -->
+      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/2/2c/Dead_Space_cover_art.jpg" alt="Dead Space Poster">
+    </div>
+    <p class="animated">
+      Dead Space masterfully creates terror through claustrophobic corridors and unsettling atmospheres. Its photorealistic imagery and eerie design leave a lasting impact, instilling a deep-seated sense of dread.
+    </p>
+  </section>
+  
+  <!-- Slide 6: Social Isolation -->
+  <section class="section" id="slide6">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?lonely,room');"></div>
+    <h2 class="animated">Social Isolation</h2>
+    <div class="img-container animated">
+      <!-- A photorealistic image representing isolation -->
+      <img class="poster-image" src="https://source.unsplash.com/600x400/?alone,isolated" alt="Isolation Image">
+    </div>
+    <p class="animated">
+      Endless hours immersed in virtual worlds can replace real-life interactions—leading to profound loneliness and a decline in social skills. This digital isolation comes at a steep emotional price.
+    </p>
+  </section>
+  
+  <!-- Slide 7: Counterarguments & Rebuttal -->
+  <section class="section" id="slide7">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?debate,discussion');"></div>
+    <h2 class="animated">Counterarguments &amp; Rebuttal</h2>
+    <div class="img-container animated">
+      <!-- An image symbolizing debate (abstract photorealistic representation) -->
+      <img class="poster-image" src="https://source.unsplash.com/600x400/?debate" alt="Debate Image">
+    </div>
+    <p class="animated">
+      While some tout video games as tools for skill-building and stress relief, the long-term psychological costs—escalating aggression, desensitization, and isolation—are too significant to ignore.
+    </p>
+  </section>
+  
+  <!-- Slide 8: Conclusion & Sources -->
+  <section class="section" id="slide8">
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?justice,verdict');"></div>
+    <h2 class="animated">Conclusion &amp; Sources</h2>
+    <div class="img-container animated">
+      <!-- An image symbolizing justice and conclusion -->
+      <img class="poster-image" src="https://source.unsplash.com/600x400/?justice" alt="Justice Image">
+    </div>
+    <p class="animated">
+      Although video games offer immersive entertainment, their darker impacts—from encouraging aggression and desensitization to fostering isolation—demand a critical reassessment of our digital culture.
+    </p>
+    <p class="animated" style="font-size:0.9rem; margin-top:20px;">
+      Sources: American Psychological Association, Harvard Studies, Independent Reviews.<br>
+      Prepared for Mr. Foxx's class.
+    </p>
+  </section>
+  
+  <!-- Back-to-top Button -->
+  <button class="back-to-top">Top</button>
+  
   <script>
-    // Enhanced intersection observer for fade-in effects
-    const sectionsToAnimate = document.querySelectorAll('.section');
+    // Custom cursor movement
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.left = e.clientX + 'px';
+    });
+    
+    // Intersection Observer for fade-in sections
+    const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
+        if(entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
     
-    sectionsToAnimate.forEach(section => {
-      observer.observe(section);
-    });
-
-    // Navigation Dots Functionality
-    const navDots = document.querySelectorAll('.nav-dots button');
-    navDots.forEach(dot => {
+    // Navigation dots functionality
+    const dots = document.querySelectorAll('.nav-dots button');
+    dots.forEach(dot => {
       dot.addEventListener('click', () => {
-        const targetID = dot.getAttribute('data-target');
-        document.getElementById(targetID).scrollIntoView({ behavior: 'smooth' });
+        const target = document.getElementById(dot.getAttribute('data-target'));
+        target.scrollIntoView({ behavior: 'smooth' });
       });
     });
-
-    // Active Dot Update using Intersection Observer
-    const dotObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navDots.forEach(dot => {
+    
+    // Update active dot and progress bar
+    const progressBar = document.querySelector('.progress-bar');
+    window.addEventListener('scroll', () => {
+      let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+      let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let progress = (scrollPos / totalHeight) * 100;
+      progressBar.style.width = progress + '%';
+      
+      sections.forEach(sec => {
+        let rect = sec.getBoundingClientRect();
+        if(rect.top >= 0 && rect.top < window.innerHeight / 2) {
+          let id = sec.getAttribute('id');
+          dots.forEach(dot => {
             dot.classList.toggle('active', dot.getAttribute('data-target') === id);
           });
         }
       });
-    }, { threshold: 0.6 });
+    });
     
-    sectionsToAnimate.forEach(section => dotObserver.observe(section));
-
-    // Back-to-Top Button Function
-    const backToTopBtn = document.querySelector('.back-to-top');
-    
+    // Back-to-top button functionality
+    const backToTop = document.querySelector('.back-to-top');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > window.innerHeight / 2) {
-        backToTopBtn.classList.add('visible');
+      if(window.scrollY > window.innerHeight) {
+        backToTop.classList.add('visible');
       } else {
-        backToTopBtn.classList.remove('visible');
+        backToTop.classList.remove('visible');
       }
-      
-      // Update progress bar
-      const scrollProgress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      document.querySelector('.progress-bar').style.width = `${scrollProgress}%`;
     });
-    
-    backToTopBtn.addEventListener('click', () => {
+    backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    
-    // Mouse trail effect
-    const cursorTrailsContainer = document.getElementById('cursor-trails-container');
-    let mouseX = 0;
-    let mouseY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      
-      createTrailElement();
-    });
-    
-    function createTrailElement() {
-      const trailEl = document.createElement('div');
-      trailEl.className = 'cursor-trail';
-      trailEl.style.left = mouseX + 'px';
-      trailEl.style.top = mouseY + 'px';
-      
-      cursorTrailsContainer.appendChild(trailEl);
-      
-      setTimeout(() => {
-        trailEl.style.opacity = '0.5';
-        trailEl.style.transform = 'scale(1.5)';
-      }, 10);
-      
-      setTimeout(() => {
-        trailEl.remove();
-      }, 800);
-    }
-
-    // Animate background particles
-    const bgSpans = document.querySelectorAll('.bg-animation span');
-    bgSpans.forEach(span => {
-      span.style.top = Math.random() * 100 + '%';
-      span.style.left = Math.random() * 100 + '%';
-      span.style.animationDuration = (Math.random() * 10 + 10) + 's';
-      span.style.animationDelay = (Math.random() * 5) + 's';
-    });
-    
-    // Image hover effects
-    const imageWrappers = document.querySelectorAll('.img-wrapper');
-    imageWrappers.forEach(wrapper => {
-      wrapper.addEventListener('mouseenter', () => {
-        wrapper.style.transform = 'rotateY(5deg) scale(1.02)';
-      });
-      
-      wrapper.addEventListener('mouseleave', () => {
-        wrapper.style.transform = 'rotateY(0) scale(1)';
-      });
     });
   </script>
 </body>
