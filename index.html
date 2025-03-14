@@ -16,10 +16,12 @@
       --primary-color: #3a6ea5;
       --secondary-color: #004e92;
       --text-color: #333;
-      --background-color: #f8f8f8;
+      --background-color: #f0f4f8;
       --slide-background: #fff;
       --accent-color: #6c757d;
       --transition-normal: 0.4s ease;
+      --box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      --border-radius: 12px;
     }
     
     html {
@@ -32,6 +34,7 @@
       background-color: var(--background-color);
       color: var(--text-color);
       line-height: 1.6;
+      background-image: linear-gradient(45deg, #f0f4f8 0%, #d5e1ec 100%);
     }
     
     h1, h2, h3 {
@@ -41,9 +44,15 @@
     }
     
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-top: 1rem;
       text-align: center;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: 0.5rem;
     }
     
     h1 span.byline {
@@ -52,25 +61,57 @@
       color: var(--accent-color);
       margin: 0.5rem 0;
       font-style: italic;
+      text-shadow: none;
+      -webkit-text-fill-color: var(--accent-color);
     }
     
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       text-align: center;
       margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
     }
     
     /* Section Styles */
     .section {
-      padding: 3rem 1rem;
+      padding: 3rem 2rem;
       background-color: var(--slide-background);
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin: 2rem auto;
-      max-width: 900px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin: 3rem auto;
+      max-width: 1000px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .section.visible {
       opacity: 1;
-      transition: opacity 0.8s ease;
-      min-height: auto;
+      transform: translateY(0);
+    }
+    
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     }
     
     .text {
@@ -78,18 +119,21 @@
       max-width: 800px;
       margin: 1.5rem auto;
       text-align: left;
-      line-height: 1.6;
+      line-height: 1.8;
+      color: #444;
     }
     
     .text strong {
       color: var(--secondary-color);
+      font-weight: 600;
     }
     
-    /* Image Styles */
+    /* Enhanced Image Styles */
     .img-container {
-      margin: 2rem auto;
-      width: 80%;
-      max-width: 600px;
+      margin: 2.5rem auto;
+      width: 85%;
+      max-width: 700px;
+      perspective: 1000px;
     }
     
     .img-wrapper {
@@ -98,11 +142,17 @@
       padding-bottom: 56.25%; /* 16:9 aspect ratio */
       position: relative;
       overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
     }
     
-    .placeholder-img {
+    .img-wrapper:hover {
+      transform: rotateY(5deg);
+    }
+    
+    .img-bg {
       position: absolute;
       top: 0;
       left: 0;
@@ -117,17 +167,36 @@
       padding: 1rem;
       background-size: cover;
       background-position: center;
+      transition: transform 0.8s ease;
+    }
+    
+    .img-bg:hover {
+      transform: scale(1.05);
     }
     
     .img-caption {
       text-align: center;
       font-style: italic;
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
       color: var(--accent-color);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      position: relative;
+      padding-bottom: 0.5rem;
     }
     
-    /* Navigation Styles */
+    .img-caption::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--accent-color);
+      opacity: 0.5;
+    }
+    
+    /* Advanced Navigation Styles */
     .nav-dots {
       position: fixed;
       bottom: 20px;
@@ -135,22 +204,37 @@
       transform: translateX(-50%);
       display: flex;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 8px 12px;
-      border-radius: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 16px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       z-index: 1000;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     
     .nav-dots button {
       display: block;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       margin: 0 8px;
       background: #ccc;
       border: none;
       border-radius: 50%;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-dots button::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 1px solid transparent;
       transition: all 0.3s ease;
     }
     
@@ -159,82 +243,148 @@
       transform: scale(1.3);
     }
     
-    /* Back-to-top Button */
+    .nav-dots button.active::after {
+      border-color: var(--primary-color);
+      opacity: 0.5;
+    }
+    
+    .nav-dots button:hover {
+      background: var(--secondary-color);
+      transform: scale(1.2);
+    }
+    
+    /* Enhanced Back-to-top Button */
     .back-to-top {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: var(--primary-color);
       color: white;
-      padding: 10px 15px;
+      width: 50px;
+      height: 50px;
       border: none;
-      border-radius: 5px;
+      border-radius: 50%;
       cursor: pointer;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
       z-index: 100;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
     }
     
     .back-to-top.visible {
       opacity: 1;
+      transform: translateY(0);
     }
     
-    /* Progress Bar */
-    .progress-bar {
+    .back-to-top:hover {
+      background: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+    /* Enhanced Progress Bar */
+    .progress-container {
       position: fixed;
       top: 0;
       left: 0;
-      width: 0%;
-      height: 4px;
-      background: var(--primary-color);
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
       z-index: 9999;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       transition: width 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: progress-shine 2s infinite;
+    }
+    
+    @keyframes progress-shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(400%); }
     }
     
     /* Sources Section */
     .sources {
       font-size: 0.9rem;
-      margin-top: 2rem;
-      padding-top: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
       border-top: 1px solid #eee;
       font-style: italic;
+      color: var(--accent-color);
     }
     
     /* Specific Image Backgrounds */
     .game-violence-bg {
-      background-color: #222;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  radial-gradient(circle at center, #520000 0%, #000 100%);
     }
     
     .war-games-bg {
-      background-color: #333;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  radial-gradient(circle at center, #263238 0%, #000 100%);
     }
     
     .fighting-games-bg {
-      background-color: #442222;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  radial-gradient(circle at center, #4a1010 0%, #000 100%);
     }
     
     .horror-games-bg {
-      background-color: #221122;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  radial-gradient(circle at center, #1a0022 0%, #000 100%);
     }
     
     .video-games-bg {
-      background-color: #224422;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  radial-gradient(circle at center, #003300 0%, #000 100%);
     }
     
     .human-reflection-bg {
-      background-color: #112233;
-      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  radial-gradient(circle at center, #001a33 0%, #000 100%);
+    }
+    
+    /* Mouse trail effect */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      opacity: 0;
+      z-index: 10000;
+      pointer-events: none;
+      transition: transform 0.1s, opacity 0.5s;
     }
     
     /* Responsive Adjustments */
     @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.5rem; }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
       .text { font-size: 1rem; }
       .img-container { width: 95%; }
       .section { padding: 2rem 1rem; }
@@ -242,15 +392,70 @@
     
     @media (max-width: 480px) {
       h1 { font-size: 1.8rem; }
-      h2 { font-size: 1.3rem; }
+      h2 { font-size: 1.4rem; }
       .text { font-size: 0.95rem; }
       .nav-dots { display: none; }
+    }
+    
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.4;
+    }
+    
+    .bg-animation span {
+      position: absolute;
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      opacity: 0;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: scale(0) translateY(0) rotate(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.1;
+      }
+      100% {
+        transform: scale(0.8) translateY(-800px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Content fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+  <!-- Background Animation -->
+  <div class="bg-animation">
+    <span style="left:10%; animation-delay: 0s;"></span>
+    <span style="left:20%; animation-delay: 2s;"></span>
+    <span style="left:35%; animation-delay: 4s;"></span>
+    <span style="left:50%; animation-delay: 6s;"></span>
+    <span style="left:65%; animation-delay: 8s;"></span>
+    <span style="left:80%; animation-delay: 10s;"></span>
+    <span style="left:90%; animation-delay: 12s;"></span>
+  </div>
+
   <!-- Progress Bar -->
-  <div class="progress-bar"></div>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
   
   <!-- Title Slide -->
   <header class="section" id="slide0">
@@ -289,7 +494,7 @@
       <h2>Violence and Aggression</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img game-violence-bg">
+          <div class="img-bg game-violence-bg">
             <img src="/api/placeholder/600/340" alt="Video game violence representation">
           </div>
         </div>
@@ -305,7 +510,7 @@
       <h2>Desensitization to War</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img war-games-bg">
+          <div class="img-bg war-games-bg">
             <img src="/api/placeholder/600/340" alt="Military simulation game representation">
           </div>
         </div>
@@ -321,7 +526,7 @@
       <h2>Brutality in Fighting Games</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img fighting-games-bg">
+          <div class="img-bg fighting-games-bg">
             <img src="/api/placeholder/600/340" alt="Fighting game representation">
           </div>
         </div>
@@ -337,7 +542,7 @@
       <h2>Psychological Effects of Horror Games</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img horror-games-bg">
+          <div class="img-bg horror-games-bg">
             <img src="/api/placeholder/600/340" alt="Horror game representation">
           </div>
         </div>
@@ -353,7 +558,7 @@
       <h2>Counterarguments &amp; Considerations</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img video-games-bg">
+          <div class="img-bg video-games-bg">
             <img src="/api/placeholder/600/340" alt="Video game diversity representation">
           </div>
         </div>
@@ -369,7 +574,7 @@
       <h2>Extended Argument &amp; Human Reflection</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img human-reflection-bg">
+          <div class="img-bg human-reflection-bg">
             <img src="/api/placeholder/600/340" alt="Human reflection representation">
           </div>
         </div>
@@ -380,13 +585,12 @@
       </p>
     </section>
 
-  
     <!-- Slide 8: Conclusion & Final Thoughts -->
     <section class="section" id="slide8">
       <h2>Conclusion &amp; Final Thoughts</h2>
       <div class="img-container">
         <div class="img-wrapper">
-          <div class="placeholder-img video-games-bg">
+          <div class="img-bg video-games-bg">
             <img src="/api/placeholder/600/340" alt="Video games balance representation">
           </div>
         </div>
@@ -403,7 +607,14 @@
   </main>
 
   <footer>
-    <button class="back-to-top">Back to Top</button>
+    <button class="back-to-top">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 2l-8 8h5v10h6V10h5z"></path>
+      </svg>
+    </button>
+    
+    <!-- Cursor trails container -->
+    <div id="cursor-trails-container"></div>
   </footer>
 
   <script>
@@ -413,13 +624,13 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
     
     sectionsToAnimate.forEach(section => {
-      section.style.opacity = '0';
       observer.observe(section);
     });
 
@@ -463,6 +674,57 @@
     
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Mouse trail effect
+    const cursorTrailsContainer = document.getElementById('cursor-trails-container');
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      createTrailElement();
+    });
+    
+    function createTrailElement() {
+      const trailEl = document.createElement('div');
+      trailEl.className = 'cursor-trail';
+      trailEl.style.left = mouseX + 'px';
+      trailEl.style.top = mouseY + 'px';
+      
+      cursorTrailsContainer.appendChild(trailEl);
+      
+      setTimeout(() => {
+        trailEl.style.opacity = '0.5';
+        trailEl.style.transform = 'scale(1.5)';
+      }, 10);
+      
+      setTimeout(() => {
+        trailEl.remove();
+      }, 800);
+    }
+
+    // Animate background particles
+    const bgSpans = document.querySelectorAll('.bg-animation span');
+    bgSpans.forEach(span => {
+      span.style.top = Math.random() * 100 + '%';
+      span.style.left = Math.random() * 100 + '%';
+      span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      span.style.animationDelay = (Math.random() * 5) + 's';
+    });
+    
+    // Image hover effects
+    const imageWrappers = document.querySelectorAll('.img-wrapper');
+    imageWrappers.forEach(wrapper => {
+      wrapper.addEventListener('mouseenter', () => {
+        wrapper.style.transform = 'rotateY(5deg) scale(1.02)';
+      });
+      
+      wrapper.addEventListener('mouseleave', () => {
+        wrapper.style.transform = 'rotateY(0) scale(1)';
+      });
     });
   </script>
 </body>
