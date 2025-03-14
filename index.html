@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Impact of Video Games: A Critical Analysis</title>
   <style>
-    /* Reset and Base Styles */
+    /* =========================================================================
+       RESET & BASE STYLES
+    ========================================================================= */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
     body {
       font-family: 'Arial', sans-serif;
       background: #111;
@@ -17,7 +20,9 @@
     h1, h2 { letter-spacing: 2px; text-transform: uppercase; }
     p { line-height: 1.6; margin: 20px 0; }
     
-    /* Section (Slide) Styles */
+    /* =========================================================================
+       SECTION (SLIDE) CONTAINER STYLES
+    ========================================================================= */
     .section {
       position: relative;
       padding: 60px 20px;
@@ -26,6 +31,7 @@
       border-radius: 15px;
       overflow: hidden;
       z-index: 1;
+      /* Initial hidden state for fade-in */
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 1s ease, transform 1s ease;
@@ -34,41 +40,78 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* Each slide gets its own photorealistic background via CSS background-image.
-       An additional .bg-effect layer (if needed) is added for extra animation. */
+    
+    /* =========================================================================
+       BACKGROUND LAYERS & EFFECTS
+       Each slide has a primary photorealistic background (via .slide-bg)
+       and extra overlays for special animations (palm trees, flames, etc.)
+    ========================================================================= */
     .slide-bg {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      z-index: -2;
-      opacity: 0.6;
+      z-index: -3;
+      opacity: 0.65;
       animation: bgPulse 8s infinite alternate;
     }
     @keyframes bgPulse {
-      from { transform: scale(1); opacity: 0.6; }
-      to   { transform: scale(1.05); opacity: 0.5; }
+      from { transform: scale(1); opacity: 0.65; }
+      to   { transform: scale(1.05); opacity: 0.55; }
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
+    /* Palm trees overlay (for GTA V slide) */
+    .palm-overlay {
+      background: url('https://source.unsplash.com/1600x900/?palm,trees') repeat-x;
+      background-size: contain;
+      opacity: 0.7;
+      animation: sway 4s infinite alternate ease-in-out;
+    }
+    @keyframes sway {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(5px) translateX(5px); }
+    }
+    /* Flame overlay (for Call of Duty slide) */
+    .flame-overlay {
+      background: url('https://source.unsplash.com/1600x900/?flames,fire') center center no-repeat;
+      background-size: cover;
+      opacity: 0.3;
+      animation: flicker 1.5s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.6; }
     }
     
-    /* Custom poster image style */
+    /* =========================================================================
+       OFFICIAL POSTER IMAGE STYLES
+    ========================================================================= */
     .poster-image {
       width: 300px;
       max-width: 90%;
       border: 5px solid #fff;
       border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
       margin: 20px auto;
       display: block;
     }
     
-    /* Custom Cursor */
+    /* =========================================================================
+       CUSTOM ANIMATED CURSOR
+    ========================================================================= */
     #custom-cursor {
       position: fixed;
       top: 0; left: 0;
       width: 20px;
       height: 20px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
@@ -76,7 +119,9 @@
       z-index: 10000;
     }
     
-    /* Navigation Dots and Progress Bar */
+    /* =========================================================================
+       NAVIGATION DOTS & PROGRESS BAR
+    ========================================================================= */
     .nav-dots {
       position: fixed;
       bottom: 20px;
@@ -112,7 +157,9 @@
       transition: width 0.2s ease;
     }
     
-    /* Image container styles */
+    /* =========================================================================
+       IMAGE CONTAINER STYLES (FOR POSTERS & EXTRA IMAGES)
+    ========================================================================= */
     .img-container {
       margin: 20px auto;
       max-width: 600px;
@@ -122,14 +169,24 @@
     .img-container img {
       width: 100%;
       border-radius: 10px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
     }
     
-    /* Fade-in text animation */
-    .animated { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    /* =========================================================================
+       FADE-IN ANIMATION FOR TEXT & ELEMENTS
+    ========================================================================= */
+    .animated {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
     
-    /* Back-to-top Button */
+    /* =========================================================================
+       BACK-TO-TOP BUTTON STYLES
+    ========================================================================= */
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -145,10 +202,39 @@
       z-index: 1000;
     }
     .back-to-top.visible { opacity: 1; }
+    
+    /* =========================================================================
+       EXTRA DETAILS: CUSTOM SCROLLBAR FOR DESKTOP
+    ========================================================================= */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #222;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #888;
+    }
+    
+    /* =========================================================================
+       PARALLAX & EXTRA LAYER EFFECTS (for extra creativity)
+    ========================================================================= */
+    .parallax-layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      transform: translateZ(0);
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
-  <!-- Custom Cursor -->
+  <!-- Custom Animated Cursor -->
   <div id="custom-cursor"></div>
   
   <!-- Progress Bar -->
@@ -169,117 +255,137 @@
     <button data-target="slide8"></button>
   </div>
   
-  <!-- Slide 0: Title Slide -->
+  <!-- ========================================================================
+       SLIDE 0: TITLE SLIDE
+       - Background: Generic gaming console (photorealistic)
+  ======================================================================== -->
   <section class="section" id="slide0">
     <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?gaming,console');"></div>
     <h1 class="animated">The Impact of Video Games: A Critical Analysis</h1>
     <p class="animated">by Thomas Adolph</p>
   </section>
   
-  <!-- Slide 1: Introduction -->
+  <!-- ========================================================================
+       SLIDE 1: INTRODUCTION
+       - Background: Cyber technology imagery (abstract digital overload)
+  ======================================================================== -->
   <section class="section" id="slide1">
-    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?digital,technology');"></div>
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?cyber,technology');"></div>
     <h2 class="animated">Introduction</h2>
     <div class="img-container animated">
-      <!-- Abstract image representing digital overload -->
-      <img src="https://source.unsplash.com/600x400/?cyber,abstract" alt="Digital Overload">
+      <img src="https://assets.entrepreneur.com/content/3x2/2000/20191112054904-FotoJet32.jpeg" alt="Digital Overload">
     </div>
     <p class="animated">
-      Video games dominate modern culture—but behind the flashy graphics and immersive worlds lies a darker reality. Repeated exposure to violent content and isolating gameplay is reshaping behavior and diminishing empathy.
+      Video games dominate modern culture—but beneath the flashy graphics and immersive worlds lies a darker truth. Repeated exposure to violent imagery and isolating gameplay is reshaping behavior and eroding empathy.
     </p>
   </section>
   
-  <!-- Slide 2: GTA V – Violence & Aggression -->
+  <!-- ========================================================================
+       SLIDE 2: GTA V – VIOLENCE & AGGRESSION
+       - Background: Venice Beach sunset with animated, swaying palm trees overlay
+  ======================================================================== -->
   <section class="section" id="slide2">
-    <!-- Background with Venice Beach sunset & animated palm trees -->
-    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?venice-beach,palm-trees');">
-      <!-- Additional CSS animation for subtle horizontal movement is applied via keyframes -->
-    </div>
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?venice-beach,sunset');"></div>
+    <div class="overlay palm-overlay"></div>
     <h2 class="animated">GTA V: Violence &amp; Aggression</h2>
     <div class="img-container animated">
-      <!-- Official GTA V poster image -->
       <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="GTA V Poster">
     </div>
     <p class="animated">
-      Grand Theft Auto V glorifies relentless violence and criminality. Its immersive depiction of brutality—set against the backdrop of sun-soaked streets and palm-lined beaches—risks normalizing hostility in everyday life.
+      Grand Theft Auto V glorifies a lifestyle steeped in violence and criminality. Its photorealistic portrayal of sun-soaked streets, palm-lined boulevards, and a decadent underworld risks normalizing aggression in everyday society.
     </p>
   </section>
   
-  <!-- Slide 3: Call of Duty – Desensitization to War -->
+  <!-- ========================================================================
+       SLIDE 3: CALL OF DUTY – DESENSITIZATION TO WAR
+       - Background: Ruined, burning city with animated flame overlay
+       - FIX: Updated Call of Duty poster to an official Modern Warfare 2019 cover
+  ======================================================================== -->
   <section class="section" id="slide3">
     <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?ruined,city,fire');"></div>
+    <div class="overlay flame-overlay"></div>
     <h2 class="animated">Call of Duty: Desensitization to War</h2>
     <div class="img-container animated">
-      <!-- Official Call of Duty poster image (example URL) -->
-      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/2/2a/Call_of_Duty_Modern_Warfare_Remastered.png" alt="Call of Duty Poster">
+      <!-- Updated to an official Modern Warfare 2019 cover -->
+      <img class="poster-image" src="https://i.etsystatic.com/37268737/r/il/d47bfa/5504291995/il_fullxfull.5504291995_4kjw.jpg" alt="Call of Duty Poster">
     </div>
     <p class="animated">
-      War games like Call of Duty immerse players in brutal, relentless conflict. The realistic, photorealistic depiction of burning ruins and battlefield chaos risks numbing the natural response to real-world violence.
+      Call of Duty immerses players in hyper-realistic depictions of warfare. The relentless barrage of explosions, burning ruins, and chaotic combat scenes numb emotional responses, dulling the natural human sensitivity to real conflict.
     </p>
   </section>
   
-  <!-- Slide 4: Mortal Kombat – Brutality in Fighting Games -->
+  <!-- ========================================================================
+       SLIDE 4: MORTAL KOMBAT – BRUTALITY IN FIGHTING GAMES
+       - Background: Fiery, combative imagery with realistic fight scenes
+  ======================================================================== -->
   <section class="section" id="slide4">
-    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?fight,fire');"></div>
+    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?fight,action');"></div>
     <h2 class="animated">Mortal Kombat: Brutality in Fighting Games</h2>
     <div class="img-container animated">
-      <!-- Official Mortal Kombat poster image -->
-      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/8/87/Mortal_Kombat_11_cover_art.jpg" alt="Mortal Kombat Poster">
+      <img class="poster-image" src="https://www.postersplug.com/cdn/shop/products/mortal-kombat-spilt-poster-773208_grande.png?v=1693727139">
     </div>
     <p class="animated">
-      Mortal Kombat’s hyper-violent spectacle not only entertains but also celebrates brutality. The realistic, photorealistic visuals intensify the message: violence is rewarded, and aggression becomes normalized.
+      Mortal Kombat’s hyper-violent spectacle champions brutal combat as entertainment. Its photorealistic graphics and visceral action sequences send a dangerous message: that savagery is not only acceptable—it’s rewarded.
     </p>
   </section>
   
-  <!-- Slide 5: Dead Space – Psychological Horror -->
+  <!-- ========================================================================
+       SLIDE 5: DEAD SPACE – PSYCHOLOGICAL HORROR
+       - Background: Eerie abandoned space station with unsettling lighting effects
+  ======================================================================== -->
   <section class="section" id="slide5">
     <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?abandoned,space');"></div>
     <h2 class="animated">Dead Space: Psychological Horror</h2>
     <div class="img-container animated">
-      <!-- Official Dead Space poster image -->
-      <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/2/2c/Dead_Space_cover_art.jpg" alt="Dead Space Poster">
+      <img class="poster-image" src="https://i.etsystatic.com/6824854/r/il/16ac92/4252320767/il_fullxfull.4252320767_talq.jpg">
     </div>
     <p class="animated">
-      Dead Space masterfully creates terror through claustrophobic corridors and unsettling atmospheres. Its photorealistic imagery and eerie design leave a lasting impact, instilling a deep-seated sense of dread.
+      Dead Space masterfully induces terror through claustrophobic corridors and an oppressive atmosphere. Its photorealistic design and relentless tension create a lingering dread that invades the player’s psyche.
     </p>
   </section>
   
-  <!-- Slide 6: Social Isolation -->
+  <!-- ========================================================================
+       SLIDE 6: SOCIAL ISOLATION
+       - Background: Dimly lit, lonely room symbolizing isolation and detachment
+  ======================================================================== -->
   <section class="section" id="slide6">
     <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?lonely,room');"></div>
     <h2 class="animated">Social Isolation</h2>
     <div class="img-container animated">
-      <!-- A photorealistic image representing isolation -->
-      <img class="poster-image" src="https://source.unsplash.com/600x400/?alone,isolated" alt="Isolation Image">
+      <img class="poster-image" src="https://westparksprings.com/wp-content/uploads/2020/06/Social-Isolation-and-Mental-Health-FB-1.png">
     </div>
     <p class="animated">
-      Endless hours immersed in virtual worlds can replace real-life interactions—leading to profound loneliness and a decline in social skills. This digital isolation comes at a steep emotional price.
+      Endless immersion in virtual worlds can sever ties to reality—leading to profound loneliness and a decline in essential social skills. The digital escape exacts a heavy emotional toll.
     </p>
   </section>
   
-  <!-- Slide 7: Counterarguments & Rebuttal -->
+  <!-- ========================================================================
+       SLIDE 7: COUNTERARGUMENTS & REBUTTAL
+       - Background: Photorealistic debate imagery with split-screen visuals representing clashing opinions
+  ======================================================================== -->
   <section class="section" id="slide7">
     <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?debate,discussion');"></div>
     <h2 class="animated">Counterarguments &amp; Rebuttal</h2>
     <div class="img-container animated">
-      <!-- An image symbolizing debate (abstract photorealistic representation) -->
-      <img class="poster-image" src="https://source.unsplash.com/600x400/?debate" alt="Debate Image">
+      <img class="poster-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_YezFU8cZF7Rjdyya6Ya58ceyILBOORWe-Q&s" alt="Debate Image">
     </div>
     <p class="animated">
-      While some tout video games as tools for skill-building and stress relief, the long-term psychological costs—escalating aggression, desensitization, and isolation—are too significant to ignore.
+      While some claim that video games enhance cognitive skills and relieve stress, mounting evidence of escalating aggression, desensitization, and social isolation paints a much darker picture.
     </p>
   </section>
   
-  <!-- Slide 8: Conclusion & Sources -->
+  <!-- ========================================================================
+       SLIDE 8: CONCLUSION & SOURCES
+       - Background: Photorealistic scales of justice with dynamic lighting effects
+  ======================================================================== -->
   <section class="section" id="slide8">
-    <div class="slide-bg" style="background-image: url('https://source.unsplash.com/1600x900/?justice,verdict');"></div>
+    <div class="slide-bg" style="background-image: url('https://m.media-amazon.com/images/I/71AD4gcTs4L._AC_UF894,1000_QL80_.jpg');"></div>
     <h2 class="animated">Conclusion &amp; Sources</h2>
     <div class="img-container animated">
-      <!-- An image symbolizing justice and conclusion -->
-      <img class="poster-image" src="https://source.unsplash.com/600x400/?justice" alt="Justice Image">
+      <img class="poster-image" src="https://t4.ftcdn.net/jpg/05/16/20/99/360_F_516209984_APT701DWSDCUPzErByEByUrqEjHwRYCX.jpg" alt="Justice Image">
     </div>
     <p class="animated">
-      Although video games offer immersive entertainment, their darker impacts—from encouraging aggression and desensitization to fostering isolation—demand a critical reassessment of our digital culture.
+      Although video games offer immersive entertainment, their darker consequences—from fostering aggression and desensitization to deepening isolation—demand a critical reassessment of our digital culture.
     </p>
     <p class="animated" style="font-size:0.9rem; margin-top:20px;">
       Sources: American Psychological Association, Harvard Studies, Independent Reviews.<br>
@@ -287,27 +393,34 @@
     </p>
   </section>
   
-  <!-- Back-to-top Button -->
+  <!-- ========================================================================
+       BACK-TO-TOP BUTTON
+  ======================================================================== -->
   <button class="back-to-top">Top</button>
   
+  <!-- ========================================================================
+       JAVASCRIPT: CURSOR, FADE-IN, NAVIGATION, PROGRESS BAR, ETC.
+  ======================================================================== -->
   <script>
-    // Custom cursor movement
+    // Custom Cursor Movement
     const cursor = document.getElementById('custom-cursor');
     document.addEventListener('mousemove', e => {
       cursor.style.top = e.clientY + 'px';
       cursor.style.left = e.clientX + 'px';
     });
     
-    // Intersection Observer for fade-in sections
+    // Intersection Observer for Section Fade-In
     const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
+    const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('visible');
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
     }, { threshold: 0.2 });
-    sections.forEach(sec => observer.observe(sec));
+    sections.forEach(sec => sectionObserver.observe(sec));
     
-    // Navigation dots functionality
+    // Navigation Dots Functionality
     const dots = document.querySelectorAll('.nav-dots button');
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
@@ -316,7 +429,7 @@
       });
     });
     
-    // Update active dot and progress bar
+    // Update Active Dot & Progress Bar on Scroll
     const progressBar = document.querySelector('.progress-bar');
     window.addEventListener('scroll', () => {
       let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
@@ -326,7 +439,7 @@
       
       sections.forEach(sec => {
         let rect = sec.getBoundingClientRect();
-        if(rect.top >= 0 && rect.top < window.innerHeight / 2) {
+        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
           let id = sec.getAttribute('id');
           dots.forEach(dot => {
             dot.classList.toggle('active', dot.getAttribute('data-target') === id);
@@ -335,10 +448,10 @@
       });
     });
     
-    // Back-to-top button functionality
+    // Back-to-Top Button Functionality
     const backToTop = document.querySelector('.back-to-top');
     window.addEventListener('scroll', () => {
-      if(window.scrollY > window.innerHeight) {
+      if (window.scrollY > window.innerHeight) {
         backToTop.classList.add('visible');
       } else {
         backToTop.classList.remove('visible');
@@ -346,6 +459,15 @@
     });
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Extra: Parallax effect on scroll for deeper layers (optional)
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      document.querySelectorAll('.parallax-layer').forEach(layer => {
+        let speed = layer.getAttribute('data-speed') || 0.5;
+        layer.style.transform = 'translateY(' + scrolled * speed + 'px)';
+      });
     });
   </script>
 </body>
